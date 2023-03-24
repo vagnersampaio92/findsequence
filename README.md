@@ -21,6 +21,9 @@ $ cd findsequence
 # Rodar o projeto com o docker, ele ficará disponível na porta http://localhost:3000/
 $ docker-compose up -d
 
+# Para parar o container
+$ docker-compose down -d
+
 # Para rodar o projeto em DEV
 # Passo 1: subir um container com Mongo
 $ docker run -d -p 27017:27017 --name matrix-mongo mongo
@@ -57,6 +60,7 @@ curl --location --request GET 'http://localhost:3000/stats'
 
 ```bash
 # Execute os testes
+# IMPORTANTE: no momento dos testes é importante estar com o banco de dev sem dados, para não afetar as estatísticas
 # Passo 1: subir um container com Mongo
 $ docker run -d -p 27017:27017 --name matrix-mongo mongo
 
@@ -68,5 +72,9 @@ Acessar e abrir no eu navegador o arquivo está em __testes__/coverage/lcov-repo
 ```
 Print do coverage 
 ![Screenshot](https://imagensvagner.s3.sa-east-1.amazonaws.com/Captura+de+Tela+2023-03-23+a%CC%80s+23.25.13.png)
+
+
+### Próximos passos
+- [ ] cobrir todas as funções com testes unitários
 
 

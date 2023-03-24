@@ -107,7 +107,7 @@ describe('Teste Routes', () => {
             expect(response.body.is_valid).toEqual(false);
         
     })
-
+    //importante o mongo estar sem dados, para não interferir nos stats
     it('stats', async () => {
         const response = await request(app)
             .get('/stats')

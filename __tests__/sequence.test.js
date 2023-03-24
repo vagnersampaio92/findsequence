@@ -10,6 +10,7 @@ const { newSequence,
 
 const sequences = ["DDDDDD", "DUBUHD", "UBUUHU", "BHBDHH", "DDDDUB", "UDBDUH"]
 
+
 describe('Teste Sequence funtions', () => {
 
     it('move function', async () => {
@@ -27,7 +28,7 @@ describe('Teste Sequence funtions', () => {
     })
     it('getLetter function exception', async () => {
         try {
-           getLetter(sequences, 20, 3)
+            getLetter(sequences, 20, 3)
         } catch (error) {
             expect(error.message).toEqual("Cannot read properties of undefined (reading '3')")
         }
@@ -47,10 +48,35 @@ describe('Teste Sequence funtions', () => {
         }
 
     })
-    it('verifyCaracterefunction', async () => {
+    it('verifyCaractere function', async () => {
 
-        const response = await verifyCaractere('H') 
+        const response = await verifyCaractere('H')
         expect(response).toEqual(true)
+
+    })
+
+    it('walkColumn function', async () => {
+
+        const response = await walkColumn(sequences, 0)
+        expect(response).toEqual(3)
+
+    })
+
+    it('walkColumn function exepction', async () => {
+        try {
+            const response = await walkColumn(sequences, 10)
+            expect(response).toEqual(3)
+        } catch (error) {
+            expect(error.message).toEqual("Cannot read properties of undefined (reading '0')")
+        }
+
+
+    })
+
+    it('directionWalk function', async () => {
+
+        const response = await directionWalk(sequences, [0,0], "D", 0)
+        expect(response).toEqual(1)
 
     })
 

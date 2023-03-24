@@ -15,4 +15,5 @@ services:
     depends_on:
       - db
     environment:
+      - PORT=3000
       - MONGODB_URI=mongodb://db:27017/api-db

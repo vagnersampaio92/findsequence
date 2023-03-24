@@ -103,7 +103,7 @@ function searchSequence(matrix, position, letter, direction, count) {
         const nextCount = (getLetter(matrix, line, column) === letter) ? count + 1 : 1
         return searchSequence(matrix, nextPosition, letter, direction, nextCount)
     } catch (error) {
-        throw new Error(error.message)
+        throw new Error("searchSequence Error")
     }
 }
 
