@@ -16,6 +16,8 @@ $ git clone https://github.com/vagnersampaio92/findsequence.git
 # Acesse a pasta do projeto no terminal/cmd
 $ cd findsequence
 
+
+
 # Rodar o projeto com o docker, ele ficará disponível na porta http://localhost:3000/
 $ docker-compose up -d
 
@@ -23,7 +25,12 @@ $ docker-compose up -d
 # Passo 1: subir um container com Mongo
 $ docker run -d -p 27017:27017 --name matrix-mongo mongo
 
-# Passo 2: Execute os testes
+# Passo 2: Criar um arquivo .env se baseando no .env.exemple
+
+# Passo 3: instalar os pacotes
+$ npm install
+
+# Passo 4: Execute os testes
 $ npm run dev
 
 ```

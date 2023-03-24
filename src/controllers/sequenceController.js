@@ -44,7 +44,7 @@ async function hasSequence(matrix) {
 
 }
 async function walkColumn(matrix, line) {
-   let countSequence = 0
+    let countSequence = 0
     try {
         for (let column = 0; column < matrix.length; column++) {
             let count = 0
@@ -58,41 +58,53 @@ async function walkColumn(matrix, line) {
     }
 }
 async function verifyCaractere(currentLetter) {
-    // direções possíveis (horizontal, vertical, diagonal para baixo e direita, diagonal para baixo e esquerda)
-    const validLetters = new Set(["B", "U", "D", "H"])
-    if (!validLetters.has(currentLetter)) {
-        throw new Error('Invalid character');
-    }
+        // direções possíveis (horizontal, vertical, diagonal para baixo e direita, diagonal para baixo e esquerda)
+        const validLetters = new Set(["B", "U", "D", "H"])
+        if (!validLetters.has(currentLetter)) {
+            throw new Error('Invalid character');
+        }
+   
+        return true
 }
 async function directionWalk(matrix, position, currentLetter, count) {
-    let countSequence = 0
-    const directions = [[1, 0], [0, 1], [1, 1], [1, -1]]
-    await directions.map(async direction => {
-        let isSequence = await searchSequence(matrix, position, currentLetter, direction, count)
-        if (isSequence) {
-            countSequence++
-        }
-    })
-    return countSequence
+    try {
+        let countSequence = 0
+        const directions = [[1, 0], [0, 1], [1, 1], [1, -1]]
+        await directions.map(async direction => {
+            let isSequence = await searchSequence(matrix, position, currentLetter, direction, count)
+            if (isSequence) {
+                countSequence++
+            }
+        })
+        return countSequence
+
+    } catch (error) {
+        throw new Error(error.message)
+    }
+
 }
 
 function searchSequence(matrix, position, letter, direction, count) {
-    const [line, column] = position
-    if (count === 4) {
-        return true
-    }
+    try {
+        const [line, column] = position
+        if (count === 4) {
+            return true
+        }
 
-    if (!isValidPosition(matrix, line, column)) {
-        return false
-    }
+        if (!isValidPosition(matrix, line, column)) {
+            return false
+        }
 
-    if (getLetter(matrix, line, column) !== letter) {
-        return false
-    }
+        if (getLetter(matrix, line, column) !== letter) {
+            return false
+        }
 
-    const nextPosition = move(position, direction)
-    const nextCount = (getLetter(matrix, line, column) === letter) ? count + 1 : 1
-    return searchSequence(matrix, nextPosition, letter, direction, nextCount)
+        const nextPosition = move(position, direction)
+        const nextCount = (getLetter(matrix, line, column) === letter) ? count + 1 : 1
+        return searchSequence(matrix, nextPosition, letter, direction, nextCount)
+    } catch (error) {
+        throw new Error(error.message)
+    }
 }
 
 function isValidPosition(matrix, line, column) {
@@ -100,7 +112,12 @@ function isValidPosition(matrix, line, column) {
 }
 
 function getLetter(matrix, line, column) {
-    return matrix[line][column]
+    try {
+        return matrix[line][column]
+    } catch (error) {
+        throw new Error(error.message)
+    }
+
 }
 
 function move(position, direction) {
@@ -110,6 +127,15 @@ function move(position, direction) {
 }
 
 module.exports = {
-    index
+    index,
+    newSequence,
+    hasSequence,
+    walkColumn,
+    directionWalk,
+    verifyCaractere,
+    searchSequence,
+    isValidPosition,
+    getLetter,
+    move
 }
 

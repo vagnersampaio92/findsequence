@@ -15,5 +15,6 @@ function calculatesPortion(count_valid, count_invalid) {
 }
 
 module.exports = {
-    index
+    index,
+    calculatesPortion
 }

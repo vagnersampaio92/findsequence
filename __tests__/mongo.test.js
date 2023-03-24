@@ -16,7 +16,9 @@ describe('Teste mongo', () => {
             const insertRes = await insert(JSON.stringify(sequences[0]), true)
             expect(insertRes.sequence).toEqual(JSON.stringify(sequences[0]));
             expect(insertRes.is_valid).toEqual(true)
-            await deleteElementBySequence(sequences);
+           
+            //Os testes do Jest rodam em paralelo, esse delay serve para este insert ser contabilizado no teste do stats no routs.test.js, antes que seja apagado do mongo.
+            await new Promise((r) => setTimeout(r, 2000));
     })
 
 
