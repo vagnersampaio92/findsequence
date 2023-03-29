@@ -14,7 +14,7 @@ async function newSequence(matrix) {
 
     const is_valid = matrix.length >= 4 ? await hasSequence(matrix) : false
     //Fiquei com dúvida se sequencias invalidas, por conterem caracteres fora da regra e matriz não quadrada deveria ser salva no banco, 
-    //então tomei a decisão de salvar mesmo se estiverem fora das regras, para termos a estatística mais precisa de quantas sequencias inválidas foram usadas
+    //então tomei a decisão de salvar mesmo se estiverem fora das regras, para termos a estatísticas mais precisa de quantas sequencias inválidas foram usadas
     await insert(JSON.stringify(matrix), is_valid)
     return is_valid
 }
@@ -33,8 +33,7 @@ async function hasSequence(matrix) {
             }
 
         }
-        const is_valid = countSequence >= 2 ? true : false
-        return is_valid
+       return countSequence >= 2 ? true : false
 
     } catch (error) {
         //Tomei a decisão de considerar a sequencia inválida, caso tenha caractere fora da regra ou não seja quadrada
@@ -58,7 +57,7 @@ async function walkColumn(matrix, line) {
     }
 }
 async function verifyCaractere(currentLetter) {
-        // direções possíveis (horizontal, vertical, diagonal para baixo e direita, diagonal para baixo e esquerda)
+        
         const validLetters = new Set(["B", "U", "D", "H"])
         if (!validLetters.has(currentLetter)) {
             throw new Error('Invalid character');
@@ -69,6 +68,7 @@ async function verifyCaractere(currentLetter) {
 async function directionWalk(matrix, position, currentLetter, count) {
     try {
         let countSequence = 0
+        // direções possíveis (horizontal, vertical, diagonal para baixo e direita, diagonal para baixo e esquerda)
         const directions = [[1, 0], [0, 1], [1, 1], [1, -1]]
         await directions.map(async direction => {
             let isSequence = await searchSequence(matrix, position, currentLetter, direction, count)
